@@ -131,3 +131,7 @@ dmypy.json
 .vscode
 
 .idea
+
+config_example.py
+
+/static
