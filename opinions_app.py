@@ -2,6 +2,7 @@ from datetime import datetime
 from random import randrange
 
 from flask import Flask, abort, flash, redirect, render_template, url_for
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_wtf import FlaskForm
@@ -16,6 +17,7 @@ app.config['SECRET_KEY'] = 'flask_secret_123'
 # app.json.ensure_ascii = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class Opinion(db.Model):
@@ -28,6 +30,7 @@ class Opinion(db.Model):
         index=True,
         default=datetime.now
     )
+    added_by = db.Column(db.String(64))
 
 
 class OpinionForm(FlaskForm):
